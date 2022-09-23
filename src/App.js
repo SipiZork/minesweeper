@@ -247,7 +247,7 @@ function App() {
     return (
         <div className="container">
             <div className={`rules-opener${showRules ? ' show' : '' }`} onClick={() => setShowRules(!showRules)}>
-                <i class="fa-solid fa-circle-info"></i>
+                <i className="fa-solid fa-circle-info"></i>
             </div>
             <div className={`rules${showRules ? ' show' : ''}` }>
                 <h3>Rules</h3>
@@ -277,7 +277,7 @@ function App() {
                             const directions = getCellDirections(r, c);
                             const neighbors = checkNeighbors(r, c, directions);
                             if (neighbors <= 0 && !cell.bomb) cell.empty = true;
-                            return <Cell onClick={cellClickHandler} bomb={cell.bomb} key={c} neighbors={neighbors} revealed={cell.revealed} marked={cell.marked} r={r} c={c} directions={directions} />;
+                            return <Cell onClick={cellClickHandler} condition={condition} bomb={cell.bomb} key={c} neighbors={neighbors} revealed={cell.revealed} marked={cell.marked} r={r} c={c} directions={directions} />;
                         });
                     })}
                 </div>
