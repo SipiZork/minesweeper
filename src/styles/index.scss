@@ -13,7 +13,10 @@
 	flex-direction: column;
 	align-items: center;
 	gap: .25rem;
-	margin-top: 1rem;
+	padding-top: 1rem;
+	position: relative;
+	min-height: 100vh;
+	overflow-x: hidden;
 
 	.infos {
 		display: grid;
@@ -22,3 +25,63 @@
 		place-items: center;
 	}
 }
+
+.rules-opener {
+	top: 0;
+	right: 1rem;
+	width: 2rem;
+	height: 2rem;
+	display: grid;
+	place-items: center;
+	position: absolute;
+	cursor: pointer;
+	z-index: 100;
+
+	&.show {
+		color: white;
+	}
+
+	&:hover {
+		color: green;
+	}
+}
+
+.rules {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	width: 20rem;
+	height: 100vh;
+	color: white;
+	background-color: rgb(75, 75, 75);
+	top: 0;
+	right: 0;
+	transform: translateX(20rem);
+	transition: all 300ms;
+	padding: 1rem;
+
+	h3 {
+		font-size: 1.6rem;
+		margin: .5rem 0;
+		font-weight: 400;
+	}
+
+	ul {
+		list-style-type: square;
+		padding: 0 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: .5rem;
+		margin-bottom: 1rem;
+	}
+
+	span {
+		font-size: 1.1rem;
+		font-weight: bold;
+	}
+
+	&.show {
+		transform: translateX(0);
+	}
+}
+
