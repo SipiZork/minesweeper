@@ -41,30 +41,40 @@ function App() {
 
     const checkNeighbors = (r, c, directions) => {
         let bombs = 0;
-        if (directions.top) {
-            if (board[r-1][c].bomb) { bombs++; };
+        if (board[r][c].bomb) return 0;
+        for (let rowOff = -1; rowOff <= 1; rowOff++) {
+            for (let columnOff = -1; columnOff <= 1; columnOff++) {
+                let newC = c + columnOff
+                let newR = r + rowOff
+                if (newC > -1 && newC < boardSize && newR > - 1 && newR < boardSize) {
+                    if (board[newR][newC].bomb) bombs++;
+                }
+            }
         }
-        if (directions.topRight) {
-            if (board[r-1][c+1].bomb) { bombs++; };
-        }
-        if (directions.right) {
-            if (board[r][c+1].bomb) { bombs++; };
-        }
-        if (directions.bottomRight) {
-            if (board[r+1][c+1].bomb) { bombs++; };
-        }
-        if (directions.bottom) {
-            if (board[r+1][c].bomb) { bombs++; };
-        }
-        if (directions.bottomLeft) {
-            if (board[r+1][c-1].bomb) { bombs++; };
-        }
-        if (directions.left) {
-            if (board[r][c-1].bomb) { bombs++; };
-        }
-        if (directions.topLeft) {
-            if (board[r-1][c-1].bomb) { bombs++; };
-        }
+        // if (directions.top) {
+        //     if (board[r-1][c].bomb) { bombs++; };
+        // }
+        // if (directions.topRight) {
+        //     if (board[r-1][c+1].bomb) { bombs++; };
+        // }
+        // if (directions.right) {
+        //     if (board[r][c+1].bomb) { bombs++; };
+        // }
+        // if (directions.bottomRight) {
+        //     if (board[r+1][c+1].bomb) { bombs++; };
+        // }
+        // if (directions.bottom) {
+        //     if (board[r+1][c].bomb) { bombs++; };
+        // }
+        // if (directions.bottomLeft) {
+        //     if (board[r+1][c-1].bomb) { bombs++; };
+        // }
+        // if (directions.left) {
+        //     if (board[r][c-1].bomb) { bombs++; };
+        // }
+        // if (directions.topLeft) {
+        //     if (board[r-1][c-1].bomb) { bombs++; };
+        // }
 
         return bombs;
     }
@@ -241,6 +251,7 @@ function App() {
         foundBombs = checkedFoundBombs(newBoard);
         if (foundBombs === bombsNumber && allRevealed === 0) {
             setCondition('Win');
+            revealAllCell();
         }
     }
 
