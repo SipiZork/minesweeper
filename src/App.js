@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { MobileView, BrowserView } from 'react-device-detect';
 import Cell from './components/Cell';
 
 function App() {
@@ -293,6 +294,12 @@ function App() {
                     })}
                 </div>
             ) : ''}
+            <MobileView>
+                <div className="mobile-controls">
+                    <div className="reveal"><i class="fa-regular fa-eye"></i></div>
+                    <div className="flag"><i className="fa-solid fa-flag"></i></div>
+                </div>
+            </MobileView>
         </div>
 );
 }
