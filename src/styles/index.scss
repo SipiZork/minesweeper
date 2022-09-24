@@ -85,3 +85,25 @@
 	}
 }
 
+.mobile-controls {
+	position: absolute;
+	width: 8rem;
+	height: 4rem;
+	display: flex;
+	bottom: 0;
+	left: 0;
+	cursor: pointer;
+	transform: translateX(calc(100vw / 2 - 4rem));
+
+	div {
+		width: 4rem;
+		height: 4rem;
+		display: grid;
+		place-items: center;
+		background-color: rgb(206, 206, 206);
+		
+		&.active {
+			background-color: rgb(83, 83, 83);
+		}
+	}
+}

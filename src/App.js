@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { MobileView, BrowserView } from 'react-device-detect';
+import { MobileView, BrowserView, isMobile, isBrowser } from 'react-device-detect';
 import Cell from './components/Cell';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
     const [bombsNumber, setBombsNumber] = useState(0);
     const [condition, setCondition] = useState('Stop');
     const [showRules, setShowRules] = useState(false);
+    const [activeMobileButton, setActiveMobileButton] = useState('Reveal');
 
     const setup = useCallback(() => {
         const newBoard = [];
@@ -227,7 +228,7 @@ function App() {
     const cellClickHandler = (e, r, c, directions) => {
         let newBoard = [...board];
         let foundBombs = 0;
-        if (e.ctrlKey) {
+        if (e.ctrlKey || (isMobile && activeMobileButton === 'Flag')) {
             if (!newBoard[r][c].marked) {
                 const placedMarkers = checkedPlacedMarkers(newBoard);
                 if (placedMarkers < bombsNumber) {
@@ -283,23 +284,23 @@ function App() {
                 {condition === 'Play' ? <p>Remaining Flags: {bombsNumber - checkedPlacedMarkers(board)}</p> : ''}
             </div>
             {board.length > 0 ? (
-                <div className="board" style={{ gridTemplateColumns: `repeat(${boardSize}, 40px)` }}>
+                <div className="board" style={{ gridTemplateColumns: `repeat(${boardSize}, ${isMobile ? `calc(100vw / ${boardSize}))` : '40px' }` }}>
                     {board.map((row, r) => {
                         return row.map((cell, c) => {
                             const directions = getCellDirections(r, c);
                             const neighbors = checkNeighbors(r, c, directions);
                             if (neighbors <= 0 && !cell.bomb) cell.empty = true;
-                            return <Cell onClick={cellClickHandler} condition={condition} bomb={cell.bomb} key={c} neighbors={neighbors} revealed={cell.revealed} marked={cell.marked} r={r} c={c} directions={directions} />;
+                            return <Cell onClick={cellClickHandler} condition={condition} bomb={cell.bomb} key={c} neighbors={neighbors} revealed={cell.revealed} marked={cell.marked} r={r} c={c} directions={directions} boardSize={boardSize} isMobile={isMobile} />;
                         });
                     })}
                 </div>
             ) : ''}
-            <MobileView>
+            <BrowserView>
                 <div className="mobile-controls">
-                    <div className="reveal"><i class="fa-regular fa-eye"></i></div>
-                    <div className="flag"><i className="fa-solid fa-flag"></i></div>
+                    <div onClick={() => setActiveMobileButton('Reveal')} className={`reveal ${activeMobileButton === 'Reveal' ? ' active' : ''}`}><i class="fa-regular fa-eye"></i></div>
+                    <div onClick={() => setActiveMobileButton('Flag')} className={`flag ${activeMobileButton === 'Flag' ? ' active' : ''}`}><i className="fa-solid fa-flag"></i></div>
                 </div>
-            </MobileView>
+            </BrowserView>
         </div>
 );
 }
