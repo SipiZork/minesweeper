@@ -229,7 +229,7 @@ function App() {
         let newBoard = [...board];
         let foundBombs = 0;
         if (e.ctrlKey || (isMobile && activeMobileButton === 'Flag')) {
-            if (!newBoard[r][c].marked) {
+            if (!newBoard[r][c].marked && !newBoard[r][c].revealed) {
                 const placedMarkers = checkedPlacedMarkers(newBoard);
                 if (placedMarkers < bombsNumber) {
                     newBoard[r][c].marked = true;
@@ -240,11 +240,12 @@ function App() {
             }
             setBoard(newBoard);
         }
-        else if (!e.crtlKey && newBoard && newBoard.length > 0) {
-            if (newBoard[r][c].bomb) {
+        else if (!e.crtlKey) {
+            if (newBoard[r][c].bomb && !newBoard[r][c].marked) {
                 setCondition('Lost');
                 revealAllCell();
-            } else {
+            } else if (!newBoard[r][c].marked) {
+                console.log(newBoard[r][c]);
                 const test = revealCell(r, c, directions, newBoard);
                 setBoard(test);
             }
