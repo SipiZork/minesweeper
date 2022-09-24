@@ -266,17 +266,21 @@ function App() {
             <div className={`rules${showRules ? ' show' : ''}` }>
                 <h3>Rules</h3>
                 <ul>
-                    <li>If you find an empty cell then will reveal all neighbors empty cells until it reach a cell contains number.</li>
+                    <li>If you find an empty cell then will reveal all neighbor empty cells until it reach a cell contains number.</li>
                     <li>The number in the cell means how many bombs are in the neighbors of the revealed cell.</li>
                     <li>if you reveal a bomb, all cells are revealed and you lost the game.</li>
                     <li>You have to reveal or mark all cells to win the game.</li>
                 </ul>
-                <h3>Controls</h3>
+                <h3>Controls on Computer</h3>
                 <ul>
                     <li>You can reveal a cell with mouse left click on it.</li>
                     <li>If you think the cell contain bomb you can press the <span>'Ctrl'</span> button when left click to mark the cell with a flag.</li>
-                    <li>If you revealed all non-bomb cells and marked all bomb cells you won the game.</li>
                 </ul>
+                <h3>Controls On mobile</h3>
+                <ul>
+                    <li>You can choose from bottom menu an option, reveal or mark cells.</li>
+                </ul>
+                    <p>When you revealed all non-bomb cells and marked all bomb cells you won the game.</p>
             </div>
             <h3>Sipizork's minesweeper</h3>
             <div className="infos">
