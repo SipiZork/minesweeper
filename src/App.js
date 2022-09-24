@@ -295,12 +295,12 @@ function App() {
                     })}
                 </div>
             ) : ''}
-            <BrowserView>
+            <MobileView>
                 <div className="mobile-controls">
                     <div onClick={() => setActiveMobileButton('Reveal')} className={`reveal ${activeMobileButton === 'Reveal' ? ' active' : ''}`}><i class="fa-regular fa-eye"></i></div>
                     <div onClick={() => setActiveMobileButton('Flag')} className={`flag ${activeMobileButton === 'Flag' ? ' active' : ''}`}><i className="fa-solid fa-flag"></i></div>
                 </div>
-            </BrowserView>
+            </MobileView>
         </div>
 );
 }
